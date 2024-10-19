@@ -1,0 +1,394 @@
+{
+  "openapi" : "3.0.0",
+  "info" : {
+    "title" : "API Documentation",
+    "description" : "Documentación para CRUD API para companies y management",
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "description" : "SwaggerHub API Auto Mocking",
+    "url" : "https://virtserver.swaggerhub.com/EARAYA/CRUD/1.0.0"
+  }, {
+    "url" : "http://localhost:3000/api"
+  } ],
+  "paths" : {
+    "/company" : {
+      "get" : {
+        "summary" : "Devuelve una lista de compañias",
+        "responses" : {
+          "200" : {
+            "description" : "Una lista de compañias",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object",
+                    "properties" : {
+                      "id" : {
+                        "type" : "integer"
+                      },
+                      "name" : {
+                        "type" : "string"
+                      },
+                      "logo" : {
+                        "type" : "string"
+                      },
+                      "description" : {
+                        "type" : "string"
+                      },
+                      "created_at" : {
+                        "type" : "string",
+                        "format" : "date-time"
+                      },
+                      "updated_at" : {
+                        "type" : "string",
+                        "format" : "date-time"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Creacion de nueva compañia",
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "name" : {
+                    "type" : "string"
+                  },
+                  "logo" : {
+                    "type" : "string"
+                  },
+                  "description" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Compañia creada"
+          },
+          "400" : {
+            "description" : "Input inválido"
+          }
+        }
+      }
+    },
+    "/company/{id}" : {
+      "get" : {
+        "summary" : "Devuelve una compañia en especifico a través de un id",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "description" : "ID de la compañia a obtener",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "A company object",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "id" : {
+                      "type" : "integer"
+                    },
+                    "name" : {
+                      "type" : "string"
+                    },
+                    "logo" : {
+                      "type" : "string"
+                    },
+                    "description" : {
+                      "type" : "string"
+                    },
+                    "created_at" : {
+                      "type" : "string",
+                      "format" : "date-time"
+                    },
+                    "updated_at" : {
+                      "type" : "string",
+                      "format" : "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Company not found"
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Actualiza una compañía especifica a través ID",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "description" : "ID de la compañia a actualizar",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "name" : {
+                    "type" : "string"
+                  },
+                  "logo" : {
+                    "type" : "string"
+                  },
+                  "description" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "compañia actualizada"
+          },
+          "400" : {
+            "description" : "Input inválido"
+          },
+          "404" : {
+            "description" : "Compañia not found"
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Elimina una compañía especifica a través del id",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "description" : "ID de la compañia a eliminar",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Compañia eliminada"
+          },
+          "404" : {
+            "description" : "Compañia not found"
+          }
+        }
+      }
+    },
+    "/management" : {
+      "get" : {
+        "summary" : "Devuelve una lista de managment ingresados",
+        "responses" : {
+          "200" : {
+            "description" : "Una lista de managment ingresados",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "type" : "object",
+                    "properties" : {
+                      "id" : {
+                        "type" : "integer"
+                      },
+                      "company_id" : {
+                        "type" : "integer"
+                      },
+                      "name" : {
+                        "type" : "string"
+                      },
+                      "description" : {
+                        "type" : "string"
+                      },
+                      "created_at" : {
+                        "type" : "string",
+                        "format" : "date-time"
+                      },
+                      "updated_at" : {
+                        "type" : "string",
+                        "format" : "date-time"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Crea un nuevo registro de management",
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "company_id" : {
+                    "type" : "integer"
+                  },
+                  "name" : {
+                    "type" : "string"
+                  },
+                  "description" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Management creado"
+          },
+          "400" : {
+            "description" : "Input inválido"
+          }
+        }
+      }
+    },
+    "/management/{id}" : {
+      "get" : {
+        "summary" : "Devuelve un management especifico a través del id",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "description" : "Id del management a obtener",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Una entrada de objeto management",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "properties" : {
+                    "id" : {
+                      "type" : "integer"
+                    },
+                    "company_id" : {
+                      "type" : "integer"
+                    },
+                    "name" : {
+                      "type" : "string"
+                    },
+                    "description" : {
+                      "type" : "string"
+                    },
+                    "created_at" : {
+                      "type" : "string",
+                      "format" : "date-time"
+                    },
+                    "updated_at" : {
+                      "type" : "string",
+                      "format" : "date-time"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Management not found"
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Actualizar una entrada específica de management por ID",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "description" : "ID de la entrada de management a obtener",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "required" : true,
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "company_id" : {
+                    "type" : "integer"
+                  },
+                  "name" : {
+                    "type" : "string"
+                  },
+                  "description" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Management actualizado"
+          },
+          "400" : {
+            "description" : "Input inválido"
+          },
+          "404" : {
+            "description" : "Management not found"
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "Elimina una entrada de management especifica por ID",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "required" : true,
+          "description" : "ID de la entrada de management",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Management borrado"
+          },
+          "404" : {
+            "description" : "Management not found"
+          }
+        }
+      }
+    }
+  }
+}
