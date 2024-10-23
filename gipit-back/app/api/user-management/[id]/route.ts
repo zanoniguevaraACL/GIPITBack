@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET( req: NextRequest,{ params }: { params: { id: string } }) {
   const { id } = params;
   try {
     const userManagement = await prisma.users_management.findUnique({
@@ -13,7 +13,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     if (!userManagement) return NextResponse.json({ error: 'Relation not found' }, { status: 404 });
     return NextResponse.json(userManagement, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ error: 'Error fetching relation' }, { status: 500 });
+    return NextResponse.json({ error: `Error fetching relation - ${error}` }, { status: 500 });
   }
 }
 
@@ -27,7 +27,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
       });
       return NextResponse.json(updatedRelation, { status: 200 });
     } catch (error) {
-      return NextResponse.json({ error: 'Error updating relation' }, { status: 500 });
+      return NextResponse.json({ error: `Error updating relation- ${error}` }, { status: 500 });
     }
   }
 
@@ -37,8 +37,9 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
       await prisma.users_management.delete({
         where: { id: parseInt(id) },
       });
+      console.log(req)
       return NextResponse.json({ message: 'Relation deleted' }, { status: 200 });
     } catch (error) {
-      return NextResponse.json({ error: 'Error deleting relation' }, { status: 500 });
+      return NextResponse.json({ error: `Error deleting relation- ${error}` }, { status: 500 });
     }
   }

@@ -34,7 +34,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
         if (!user) return NextResponse.json({ error: 'User not found' }, { status: 404 });
         return NextResponse.json(user, { status: 200 });
     } catch (error) {
-        return NextResponse.json({ error: 'Error fetching user' }, { status: 500 });
+        return NextResponse.json({ error: `Error fetching user ${error}` }, { status: 500 });
     }
 }
 
@@ -71,7 +71,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
         });
         return NextResponse.json(updatedUser, { status: 200 });
     } catch (error) {
-        return NextResponse.json({ error: 'Error updating user' }, { status: 500 });
+        return NextResponse.json({ error: `Error updating user - ${error}` }, { status: 500 });
     }
 }
 
@@ -100,6 +100,6 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
         });
         return NextResponse.json({ message: 'User deleted' }, { status: 200 });
     } catch (error) {
-        return NextResponse.json({ error: 'Error deleting user' }, { status: 500 });
+        return NextResponse.json({ error: `Error deleting user- ${error}` }, { status: 500 });
     }
 }
