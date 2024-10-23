@@ -5,6 +5,21 @@ import { NextRequest, NextResponse } from 'next/server';
 const prisma = new PrismaClient();
 
 // Obtener todas las jefaturas (GET)
+/**
+ * @swagger
+ * /company:
+ *   get:
+ *     summary: Obtener todas las compañías
+ *     responses:
+ *       200:
+ *         description: Lista de compañías
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Company'
+ */
 export async function GET() {
   try {
     const managements = await prisma.company.findMany();
@@ -15,6 +30,23 @@ export async function GET() {
 }
 
 // Crear una nueva jefatura (POST)
+/**
+ * @swagger
+ * /company:
+ *   post:
+ *     summary: Crear una nueva compañía
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Company'
+ *     responses:
+ *       201:
+ *         description: Compañía creada exitosamente
+ *       500:
+ *         description: Error al crear la compañía
+ */
 export async function POST(req: NextRequest) {
   const { company_id, name, description } = await req.json();
   try {

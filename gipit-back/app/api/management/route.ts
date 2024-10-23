@@ -4,6 +4,21 @@ import { NextRequest, NextResponse } from 'next/server';
 const prisma = new PrismaClient();
 
 // Obtener todas las jefaturas (GET)
+/**
+ * @swagger
+ * /management:
+ *   get:
+ *     summary: Obtener todos los registros de management
+ *     responses:
+ *       200:
+ *         description: Lista de registros de management
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 $ref: '#/components/schemas/Management'
+ */
 export async function GET() {
   try {
     const managements = await prisma.management.findMany();
@@ -14,6 +29,23 @@ export async function GET() {
 }
 
 // Crear una nueva jefatura (POST)
+/**
+ * @swagger
+ * /management:
+ *   post:
+ *     summary: Crear un nuevo registro de management
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Management'
+ *     responses:
+ *       201:
+ *         description: Registro de management creado exitosamente
+ *       500:
+ *         description: Error al crear el registro de management
+ */
 export async function POST(req: NextRequest) {
   const { company_id, name, description } = await req.json();
   try {
