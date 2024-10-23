@@ -39,7 +39,8 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 
     return NextResponse.json(company);
   } catch (error) {
-    return NextResponse.json({ error: 'Error obteniendo la compañía' }, { status: 500 });
+    console.log(error)
+    return NextResponse.json({ error: `Error obteniendo la compañía- ${error}` }, { status: 500 });
   }
 }
 
@@ -78,7 +79,8 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   
       return NextResponse.json(updatedCompany);
     } catch (error) {
-      return NextResponse.json({ error: 'Error actualizando la compañía' }, { status: 500 });
+      
+      return NextResponse.json({ error: `Error actualizando la compañía - ${error}`, }, { status: 500 });
     }
   }
 
@@ -109,6 +111,6 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   
       return NextResponse.json({ message: 'Compañía eliminada con éxito' });
     } catch (error) {
-      return NextResponse.json({ error: 'Error eliminando la compañía' }, { status: 500 });
+      return NextResponse.json({ error: `Error eliminando la compañía- ${error}` }, { status: 500 });
     }
   }
