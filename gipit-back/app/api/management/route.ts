@@ -24,7 +24,7 @@ export async function GET() {
     const managements = await prisma.management.findMany();
     return NextResponse.json(managements);
   } catch (error) {
-    return NextResponse.json({ error: 'Error fetching managements' }, { status: 500 });
+    return NextResponse.json({ error: `Error fetching managements - ${error}` }, { status: 500 });
   }
 }
 
@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
     });
     return NextResponse.json(management, { status: 201 });
   } catch (error) {
-    return NextResponse.json({ error: 'Error creating management' }, { status: 500 });
+    return NextResponse.json({ error: `Error creating management - ${error}` }, { status: 500 });
   }
 }
 
@@ -68,7 +68,7 @@ export async function PUT(req: NextRequest) {
     });
     return NextResponse.json(management);
   } catch (error) {
-    return NextResponse.json({ error: 'Error updating management' }, { status: 500 });
+    return NextResponse.json({ error: `Error updating management -${error}` }, { status: 500 });
   }
 }
 
@@ -79,6 +79,6 @@ export async function DELETE(req: NextRequest) {
     await prisma.management.delete({ where: { id: parseInt(id) } });
     return NextResponse.json({ message: 'Management deleted' }, { status: 204 });
   } catch (error) {
-    return NextResponse.json({ error: 'Error deleting management' }, { status: 500 });
+    return NextResponse.json({ error: `Error deleting management - ${error}` }, { status: 500 });
   }
 }
