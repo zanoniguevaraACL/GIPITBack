@@ -28,8 +28,8 @@ export async function POST(req: NextRequest) {
     });
     return NextResponse.json(userManagement, { status: 201 });
   } catch (error) {
-    console.log(error)
-    return NextResponse.json({ error: 'Error creating user-management relation' }, { status: 500 });
+    
+    return NextResponse.json({ error: `Error creating user-management relation- ${error}` }, { status: 500 });
   }
 }
 
@@ -48,11 +48,11 @@ export async function POST(req: NextRequest) {
  *               items:
  *                 $ref: '#/components/schemas/UserManagement'
  */
-export async function GET(req: NextRequest) {
+export async function GET() {
     try {
       const usersManagement = await prisma.users_management.findMany();
       return NextResponse.json(usersManagement, { status: 200 });
     } catch (error) {
-      return NextResponse.json({ error: 'Error fetching user-management relations' }, { status: 500 });
+      return NextResponse.json({ error: `Error fetching user-management relations ${error}` }, { status: 500 });
     }
   }

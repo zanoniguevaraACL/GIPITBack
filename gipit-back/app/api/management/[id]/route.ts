@@ -17,13 +17,13 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 
     return NextResponse.json(management);
   } catch (error) {
-    return NextResponse.json({ error: 'Error obteniendo la compañía' }, { status: 500 });
+    return NextResponse.json({ error: `Error obteniendo la compañía - ${error}` }, { status: 500 });
   }
 }
 
 export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
     const { id } = params;
-    const { company_id,name, logo, description } = await req.json();
+    const { company_id,name, description } = await req.json();
     
     try {
       const updatedmanagement = await prisma.management.update({
@@ -33,7 +33,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   
       return NextResponse.json(updatedmanagement);
     } catch (error) {
-      return NextResponse.json({ error: 'Error actualizando la compañía' }, { status: 500 });
+      return NextResponse.json({ error: `Error actualizando la compañía - ${error}` }, { status: 500 });
     }
   }
 
@@ -47,6 +47,6 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   
       return NextResponse.json({ message: 'Compañía eliminada con éxito' });
     } catch (error) {
-      return NextResponse.json({ error: 'Error eliminando la compañía' }, { status: 500 });
+      return NextResponse.json({ error: `Error eliminando la compañía- ${error}` }, { status: 500 });
     }
   }

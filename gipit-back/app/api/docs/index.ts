@@ -1,4 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+
 import { swaggerUi, swaggerSpec } from '../../lib/swagger'; 
 import { NextResponse } from 'next/server';
 
